@@ -4,41 +4,43 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**csl-inflect** generates Sanskrit declension (nominal) and conjugation (verbal) tables for all words in the MW1899 dictionary, continuing work from the `MWinflect` repository. The output will improve the [inflected forms display](http://www.sanskrit-lexicon.uni-koeln.de/work/fflexphp/web/index.php) on the Cologne web site.
+**csl-inflect** is a Sanskrit Lexicon **processing-tool** repository — part of the Cologne Digital Sanskrit Lexicon (CDSL) infrastructure.
 
-## Architecture
+## Repo Category
 
-| Directory/File | Purpose |
-|---|---|
-| `verbs/` | Verb conjugation generation (pysanskrit-based, multiple versions) |
-| `nominals/` | Nominal declension generation |
-| `web/` | Web display of inflection tables |
-| `sqlite/` | SQLite storage for inflection data |
-| `huetdata/` | Huet's SLP1 data used as reference for inflection models |
-| `redo.sh` | Full pipeline orchestration; computed files prefixed `calc_` are not tracked |
+`processing-tool` — see the [tooling runbook](https://github.com/sanskrit-lexicon/csl-observatory/blob/main/runbook/cologne-tooling-runbook.md) for category-specific conventions.
 
-### Pipeline overview
+## GitHub Issue Conventions
 
-1. Extract stem-model pairs from MW digitization (`csl-orig`)
-2. For each stem+model:
-   - `ind` (indeclinable): no inflection needed, just collect
-   - Nominal models: generate declension table via pySanskrit
-   - Verbal models: generate conjugation table via pySanskrit
-3. Store results in SQLite; serve via web display
+This repository uses the **Cologne tooling-repo taxonomy**. All issues must have:
+- **Exactly one type label** (9 options)
+- **Exactly one severity label** (4 levels)
+- **One milestone** (5 options)
 
-### pySanskrit versions
+### Type Labels
+- `bug` — Code defect (wrong output, broken contract)
+- `feature` — Net-new capability
+- `enhancement` — Improvement to existing capability
+- `performance` — Speed, memory, throughput optimization
+- `tech-debt` — Refactoring, cleanup, dependency updates
+- `security` — CVE, auth issue, credential exposure
+- `documentation` — Prose docs, API docs, comments
+- `infrastructure` — CI/CD, deploy, data pipelines, build tooling
+- `question` — Research, proposals, open discussions
 
-`verbs/` contains multiple pySanskrit version directories (`pysanskritv1`, `pysanskritv2`, `pysanskrit_work`) reflecting the iterative development of the Sanskrit morphology library.
+### Severity Labels
+- `trivial` — Cosmetic, < 1 hour
+- `minor` — Single function/component
+- `major` — Multiple files, design decision
+- `critical` — Blocks users, data loss/security CVE
 
-## Common Commands
+### Milestones
+- **API Stability** — performance, security, regressions
+- **User Experience** — bugs, features, enhancements
+- **Data Quality** — data-pipeline issues, integrity
+- **Developer Experience** — tech-debt, infrastructure, docs
+- **Community** — questions, proposals, discussions
 
-### Full rebuild (from repo root)
-```bash
-sh redo.sh
-```
+## Cross-Repo Coordination
 
-## Dependencies
-
-- **Python 3** (Python 3.4+)
-- **pySanskrit** — Sanskrit morphology library
-- **csl-orig** sibling repo — MW dictionary source
+The org-level project [Tooling Roadmap](https://github.com/orgs/sanskrit-lexicon/projects/9) tracks tool work across all repositories.
