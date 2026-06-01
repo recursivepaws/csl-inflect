@@ -1,7 +1,7 @@
 """ decline_file.py
 """
-import sys,re,codecs
-sys.path.append('../../pydecl')
+import sys,re,codecs,os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../pydecl'))
 import decline # from pydecl
 import decline_f # from pydecl
 class DeclRec(object):
